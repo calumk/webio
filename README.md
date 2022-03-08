@@ -17,6 +17,8 @@ A simple tray radio app (with gimicy visualisation)
 * often breaks when switching audio source due to bug in hls.
   - To fix, I will need to destroy() then rebuild the hls instance
 
+* @ icon is placeholder
+
 ---
 
 
