@@ -2,6 +2,9 @@ import { app, BrowserWindow, shell } from 'electron'
 import { release } from 'os'
 import { join } from 'path'
 
+import { TrayGenerator } from './tray.js'
+
+
 // Disable GPU Acceleration for Windows 7
 if (release().startsWith('6.1')) app.disableHardwareAcceleration()
 
@@ -18,8 +21,13 @@ let win: BrowserWindow | null = null
 async function createWindow() {
   win = new BrowserWindow({
     title: 'Main window',
+    frame: false ,
+    width:250,
+    height:400,
+    transparent:true,
     webPreferences: {
-      preload: join(__dirname, '../preload/index.cjs')
+      preload: join(__dirname, '../preload/index.cjs'),
+      webSecurity: false
     },
   })
 
@@ -30,7 +38,7 @@ async function createWindow() {
     const url = `http://${process.env['VITE_DEV_SERVER_HOST']}:${process.env['VITE_DEV_SERVER_PORT']}`
 
     win.loadURL(url)
-    win.webContents.openDevTools()
+    // win.webContents.openDevTools({ mode: 'detach' });
   }
 
   // Test active push message to Renderer-process
@@ -45,7 +53,19 @@ async function createWindow() {
   })
 }
 
-app.whenReady().then(createWindow)
+// app.whenReady().then(createWindow)
+
+
+let Tray; 
+
+app.whenReady().then(() => {
+  console.log("hello")
+  createWindow()
+  win.hide()
+  Tray = new TrayGenerator(win);
+  Tray.createTray();
+
+});
 
 app.on('window-all-closed', () => {
   win = null
