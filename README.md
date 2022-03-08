@@ -3,6 +3,12 @@
 
 A simple tray radio app (with gimicy visualisation)
 
+<center>
+
+![Webio](./webio_screenshot.png)
+
+</center>
+
 ---
 
 

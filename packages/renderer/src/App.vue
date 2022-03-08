@@ -120,7 +120,7 @@
 
 
 .window{
-  background-color: #fff;
+  background-color: #111;
   padding-bottom:10px;
 }
 .bars{
@@ -136,7 +136,7 @@
     display: inline-block;
     width:20px;
     /* margin:1px; */
-    background-color: #fff;
+    background-color: #111;
     height:10px;
 }
 
